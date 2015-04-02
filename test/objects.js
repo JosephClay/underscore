@@ -724,6 +724,7 @@
     ok(!_.isUndefined(NaN), 'NaN is defined');
     ok(_.isUndefined(), 'nothing is undefined');
     ok(_.isUndefined(undefined), 'undefined is undefined');
+    ok(function(undefined) { return undefined; }.call(this) === void 0, 'encapsulated undefined is a safe undefined');
   });
 
   test('isError', function() {

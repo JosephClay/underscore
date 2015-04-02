@@ -3,7 +3,7 @@
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 
-(function() {
+(function(undefined) {
 
   // Baseline setup
   // --------------
@@ -61,7 +61,7 @@
   // of the passed-in callback, to be repeatedly applied in other Underscore
   // functions.
   var optimizeCb = function(func, context, argCount) {
-    if (context === void 0) return func;
+    if (context === undefined) return func;
     switch (argCount == null ? 3 : argCount) {
       case 1: return function(value) {
         return func.call(context, value);
@@ -105,7 +105,7 @@
             l = keys.length;
         for (var i = 0; i < l; i++) {
           var key = keys[i];
-          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
+          if (!undefinedOnly || obj[key] === undefined) obj[key] = source[key];
         }
       }
       return obj;
@@ -124,7 +124,7 @@
 
   var property = function(key) {
     return function(obj) {
-      return obj == null ? void 0 : obj[key];
+      return obj == null ? undefined : obj[key];
     };
   };
 
@@ -215,7 +215,7 @@
     } else {
       key = _.findKey(obj, predicate, context);
     }
-    if (key !== void 0 && key !== -1) return obj[key];
+    if (key !== undefined && key !== -1) return obj[key];
   };
 
   // Return all the elements that pass a truth test.
@@ -383,8 +383,8 @@
       var a = left.criteria;
       var b = right.criteria;
       if (a !== b) {
-        if (a > b || a === void 0) return 1;
-        if (a < b || b === void 0) return -1;
+        if (a > b || a === undefined) return 1;
+        if (a < b || b === undefined) return -1;
       }
       return left.index - right.index;
     }), 'value');
@@ -454,7 +454,7 @@
   // values in the array. Aliased as `head` and `take`. The **guard** check
   // allows it to work with `_.map`.
   _.first = _.head = _.take = function(array, n, guard) {
-    if (array == null) return void 0;
+    if (array == null) return undefined;
     if (n == null || guard) return array[0];
     return _.initial(array, array.length - n);
   };
@@ -469,7 +469,7 @@
   // Get the last element of an array. Passing **n** will return the last N
   // values in the array.
   _.last = function(array, n, guard) {
-    if (array == null) return void 0;
+    if (array == null) return undefined;
     if (n == null || guard) return array[array.length - 1];
     return _.rest(array, Math.max(0, array.length - n));
   };
@@ -1259,7 +1259,7 @@
 
   // Is a given variable undefined?
   _.isUndefined = function(obj) {
-    return obj === void 0;
+    return obj === undefined;
   };
 
   // Shortcut function for checking if an object has a given property directly
@@ -1363,8 +1363,8 @@
   // If the value of the named `property` is a function then invoke it with the
   // `object` as context; otherwise, return it.
   _.result = function(object, property, fallback) {
-    var value = object == null ? void 0 : object[property];
-    if (value === void 0) {
+    var value = object == null ? undefined : object[property];
+    if (value === undefined) {
       value = fallback;
     }
     return _.isFunction(value) ? value.call(object) : value;
